@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>HSK 2 · 汉字</title>
+  <meta name="description" content="Флешкарточки и тренировки для слов HSK 2 (учебник 新HSK教程 2). Работает офлайн.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f4f3fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0e0e16" media="(prefers-color-scheme: dark)">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="HSK 2">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="64x64" href="icons/favicon-64.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="css/styles.css">
+  <script>
+    /* Тема и цвет до отрисовки, чтобы не было вспышки */
+    try {
+      var s = JSON.parse(localStorage.getItem('hsk2b:settings') || '{}'), r = document.documentElement;
+      if (s.theme === 'light' || s.theme === 'dark') r.setAttribute('data-theme', s.theme);
+      if (s.accent && s.accent !== 'violet') r.setAttribute('data-accent', s.accent);
+      if (s.hanziSize && s.hanziSize !== 'm') r.setAttribute('data-hz', s.hanziSize);
+    } catch (e) {}
+  </script>
+  <script src="js/vendor/hanzi-writer.min.js" defer></script>
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <div class="app">
+    <main id="view" class="view" aria-live="off"></main>
+  </div>
+
+  <nav class="tabbar" id="tabbar" aria-label="Разделы">
+    <div class="tabs">
+      <button type="button" class="tab" data-act="tab" data-tab="home">
+        <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg>Главная
+      </button>
+      <button type="button" class="tab" data-act="tab" data-tab="learn">
+        <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="13" height="14" rx="2.5"/><path d="M8 3h10.5A2.5 2.5 0 0121 5.5V17"/></svg>Учить
+        <span class="tab-badge" id="due-badge" hidden></span>
+      </button>
+      <button type="button" class="tab" data-act="tab" data-tab="dict">
+        <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4.5A1.5 1.5 0 015.5 3H18v15H6.5A2.5 2.5 0 004 20.5z"/><path d="M4 20.5A2.5 2.5 0 016.5 18H18v3H6.5A2.5 2.5 0 014 20.5z"/></svg>Словарь
+      </button>
+      <button type="button" class="tab" data-act="tab" data-tab="stats">
+        <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16"/><rect x="5.5" y="11" width="3" height="6" rx="1"/><rect x="10.5" y="6" width="3" height="11" rx="1"/><rect x="15.5" y="9" width="3" height="8" rx="1"/></svg>Прогресс
+      </button>
+      <button type="button" class="tab" data-act="tab" data-tab="settings">
+        <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/></svg>Настройки
+      </button>
+    </div>
+  </nav>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+
+  <div class="modal" id="modal" hidden>
+    <div class="modal-backdrop" data-act="modal-cancel"></div>
+    <div class="modal-dialog" role="alertdialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-text">
+      <h2 id="modal-title"></h2>
+      <p id="modal-text"></p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" id="modal-cancel" data-act="modal-cancel"></button>
+        <button type="button" class="btn btn-primary" id="modal-ok" data-act="modal-ok"></button>
+      </div>
+    </div>
+  </div>
+
+  <input type="file" id="import-file" accept=".json,application/json" hidden>
+  <div class="sr-only" id="live" aria-live="polite"></div>
+  <noscript><p class="noscript">Для работы приложения нужен включённый JavaScript.</p></noscript>
+</body>
+</html>
