@@ -40,7 +40,7 @@ function tick() {
   const left = remaining();
   const sec = Math.ceil(left / 1000);
   const t = $('#timer');
-  t.textContent = `0:${String(sec).padStart(2, '0')}`;
+  t.textContent = `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, '0')}`;
   t.classList.toggle('low', sec <= 10);
   $('#tfill').style.width = `${(left / DURATION) * 100}%`;
   if (sec <= 5 && sec > 0 && sec !== S.lastTick) {

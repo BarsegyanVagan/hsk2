@@ -4,7 +4,7 @@
 // - data/words.json берётся сначала из сети (новые слова видны сразу), без сети — из кэша.
 // При любом изменении кода увеличьте VERSION (и добавьте новые файлы в ASSETS).
 
-const VERSION = '2.0.0';
+const VERSION = '2.0.1';
 const PREFIX = 'hsk2app-';
 const CACHE = PREFIX + VERSION;
 const ASSETS = [

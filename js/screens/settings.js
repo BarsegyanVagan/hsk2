@@ -9,7 +9,7 @@ import { DIRECTIONS } from '../session.js';
 import { isIOS } from '../pwa.js';
 import * as audio from '../audio.js';
 
-export const APP_VERSION = '2.0.0';
+export const APP_VERSION = '2.0.1';
 
 const ACCENTS = [
   ['violet', 'Фиолетовый', 'hsl(248 78% 60%)'],

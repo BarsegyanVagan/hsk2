@@ -16,10 +16,15 @@ const FINALS = ['a', 'o', 'e', 'i', 'u', 'ü', 'ai', 'ei', 'ao', 'ou', 'an', 'en
   'ia', 'ie', 'iao', 'iu', 'ian', 'in', 'iang', 'ing', 'iong',
   'ua', 'uo', 'uai', 'ui', 'uan', 'un', 'uang', 'ueng', 'üe', 'üan', 'ün', 'ue'];
 
-// Набор допустимых слогов (с запасом: лишние сочетания не мешают разбору)
+// Набор допустимых слогов (с запасом: лишние сочетания согласных не мешают разбору).
+// Без начальной согласной бывают только слоги на a/o/e (an, ou, er…): uan, ia и т. п. пишутся как wan, ya.
 const SYL = new Set();
-for (const ini of INITIALS) for (const fin of FINALS) SYL.add(ini + fin);
-SYL.delete('');
+for (const ini of INITIALS) {
+  for (const fin of FINALS) {
+    if (!ini && !/^[aoe]/.test(fin)) continue;
+    SYL.add(ini + fin);
+  }
+}
 
 export function toneless(s) {
   return String(s).toLowerCase().replace(/[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ]/g, (c) => MARKS[c][0]);
